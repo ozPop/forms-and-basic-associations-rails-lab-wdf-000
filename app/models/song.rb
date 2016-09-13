@@ -21,5 +21,15 @@ class Song < ActiveRecord::Base
     self.artist.name
   end
 
+  def note_contents=(contents)
+    contents.each do |content|
+      self.notes << Note.create(content: content) unless content.blank?
+    end
+  end
+
+  def note_contents
+    self.notes.collect {|note| note.content}
+  end
+
 end
 
